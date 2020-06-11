@@ -187,12 +187,12 @@ resource "aws_autoscaling_group" "workers_launch_template" {
           "name",
           count.index,
         )}-eks_asg"
-        "propagate_at_launch" = true
+        "propagate_at_launch" = "true"
       },
       {
         "key"                 = "kubernetes.io/cluster/${aws_eks_cluster.this[0].name}"
         "value"               = "owned"
-        "propagate_at_launch" = true
+        "propagate_at_launch" = "true"
       },
     ],
     local.asg_tags,
