@@ -178,8 +178,7 @@ resource "aws_autoscaling_group" "workers_launch_template" {
     }
   }
 
-  tags = concat(
-    [
+  tags = [
       {
         "key" = "Name"
         "value" = "${aws_eks_cluster.this[0].name}-${lookup(
@@ -194,14 +193,7 @@ resource "aws_autoscaling_group" "workers_launch_template" {
         "value"               = "owned"
         "propagate_at_launch" = "true"
       },
-    ],
-    local.asg_tags,
-    lookup(
-      var.worker_groups_launch_template[count.index],
-      "tags",
-      local.workers_group_defaults["tags"]
-    )
-  )
+    ]
 
   lifecycle {
     create_before_destroy = true
