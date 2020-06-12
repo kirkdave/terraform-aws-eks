@@ -183,15 +183,6 @@ resource "aws_autoscaling_group" "workers_launch_template" {
         "key"                 = "kubernetes.io/cluster/${aws_eks_cluster.this[0].name}"
         "value"               = "owned"
         "propagate_at_launch" = "true"
-      },
-      {
-        "key" = "Name"
-        "value" = "${aws_eks_cluster.this[0].name}-${lookup(
-          var.worker_groups_launch_template[count.index],
-          "name",
-          count.index,
-        )}-eks_asg"
-        "propagate_at_launch" = "true"
       }
     ]
 
